@@ -6,7 +6,7 @@
 
     display: flex;
     align-items: center;
-    justify-content: space-between;    
+    justify-content: space-between;
 }
 
 .hero {
@@ -36,5 +36,9 @@
         span {
             color: var(--cyan-500);
         }
+    }
+
+    button {
+        margin-top: 2.5rem;
     }
 }
