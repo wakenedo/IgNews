@@ -1,9 +1,18 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { SubscribeButton } from '../components/SubscribeButton'
 import { stripe } from '../services/stripe'
 
 import styles from './home.module.scss'
+
+// Client-side
+// Server-side - Pages that are heavily on dynamic data from users 
+// Static Site Generation - Pages that are the same for everyone, like homepages, product pages, blog posts
+
+// Blog Post 
+
+// Content (SSG)
+// Comments (Client-side)
 
 interface HomeProps {
   product: {
@@ -37,7 +46,12 @@ export default function Home({product} : HomeProps) {
 
 // SSR only on pages    
 // Functions that use the Next.js node server
-export const getServerSideProps: GetServerSideProps = async () => {
+//export const getServerSideProps: GetServerSideProps = async () => {
+
+// SSG 
+// Using this method, you can generate a static html, and set up 
+// the frequency you want if refreshed with the method revalidate below
+export const getStaticProps: GetStaticProps = async () => {
   console.log('This is Next Node Server Log')
 
   const price = await stripe.prices.retrieve('price_1KWNU1JGp1HSI7VlxZ1EaA9o', {
@@ -58,6 +72,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   return {
     props: {
       product
-    }
+    },
+    revalidate: 60 * 60 * 24 // 24 hours
   }
 }
