@@ -13,6 +13,7 @@ export default NextAuth({
     }),
   ],
   callbacks: {
+    
     async signIn({ user, /*account, profile, email, credentials*/ }) {
       console.log(
         'This is NextAuth callbacks user log :', user,
@@ -45,6 +46,46 @@ export default NextAuth({
       } catch {
         return false
       }
-    }
+    },
+
+    async session({session}) {
+      try {
+        const userActiveSubscription = await fauna.query(
+          q.Get(
+            q.Intersection([
+              q.Match(
+                q.Index('subscription_user_ref'),
+                q.Select(
+                  'ref',
+                  q.Get(
+                    q.Match(
+                      q.Index('user_email'),
+                      q.Casefold(session.user.email)
+                    )
+                  )
+                )
+              ),
+              q.Match(
+                q.Index('subscription_status'),
+                'active'
+              )
+            ])
+          )
+        )
+
+
+        return { 
+          ...session, 
+          activeSubscription: userActiveSubscription 
+        }
+      } catch {
+        return { 
+          ...session, 
+          activeSubscription: null 
+        }
+      }
+
+
+    },
   }
 })
