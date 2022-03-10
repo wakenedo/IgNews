@@ -1,10 +1,13 @@
 import { GetStaticProps } from "next"
-import { getSession } from "next-auth/react"
+import { getSession, useSession } from "next-auth/react"
 import { getPrismicClient } from "../../../services/prismic"
 import { RichText } from 'prismic-dom'
 import Head from "next/head"
 
 import styles from '../post.module.scss'
+import Link from "next/link"
+import { useEffect } from "react"
+import { useRouter } from "next/router"
 
 interface PostPreviewProps {
     post: {
@@ -16,6 +19,15 @@ interface PostPreviewProps {
 }
 
 export default function PostPreview({ post }: PostPreviewProps) {
+    const { data: session } = useSession()
+    const router = useRouter()
+
+    useEffect(() => {
+        if (session?.activeSubscription) {
+            router.push(`/posts/${post.slug}`)
+        }
+    }, [session])
+
     return (
         <>
             <Head>{post.title}</Head>
@@ -25,8 +37,16 @@ export default function PostPreview({ post }: PostPreviewProps) {
                     <h1>{post.title}</h1>
                     <time>{post.updatedAt}</time>
                     <div
-                        className={styles.postContent}
-                        dangerouslySetInnerHTML={{ __html: post.content }} />
+                        className={`${styles.postContent} ${styles.previewContent}`}
+                        dangerouslySetInnerHTML={{ __html: post.content }}
+                    />
+
+                    <div className={styles.continueReading}>
+                        Wanna continue reading?
+                        <Link href='/'>
+                            <a href="">Subscribe Now 🤗</a>
+                        </Link>
+                    </div>
 
                 </article>
             </main>
@@ -51,7 +71,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     const post = {
         slug: response.uid,
         title: RichText.asText(response.data.title),
-        content: RichText.asHtml(response.data.content),
+        content: RichText.asHtml(response.data.content.splice(0, 4)),
         updatedAt: new Date(response.last_publication_date).toLocaleDateString(
             'pt-br',
             {
