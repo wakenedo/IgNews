@@ -8,7 +8,7 @@ import styles from './post.module.scss'
 
 interface PostProps {
     post: {
-        slug: string,
+        slug: string ,
         title: string,
         content: string,
         updatedAt: string
@@ -39,13 +39,13 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
 
 
     const session = await getSession({ req })
-    const slug = params?.slug
+    const { slug } = params
 
     console.log(session)
 
     if (!session?.activeSubscription) {
         return {
-            redirect : {
+            redirect: {
                 destination: '/',
                 permanent: false,
             }

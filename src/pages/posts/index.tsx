@@ -10,7 +10,7 @@ import Link from 'next/link';
 type Post = {
     slug: string,
     title: string,
-    excerpt: string, s
+    excerpt: string, 
     updatedAt: string
 }
 
@@ -27,18 +27,15 @@ export default function Posts({ posts }: PostsProps) {
 
             <main className={styles.container}>
                 <div className={styles.posts}>
-                    {posts.map((post) => {
-                        return (
-                            <Link href={`/posts/${post.slug}`}>
+                    {posts.map((post) => 
+                         (
+                            <Link href={`/posts/preview/${post.slug}`} key={post.slug}>
                                 <a key={post.slug}>
                                     <time>{post.updatedAt}</time>
                                     <strong>{post.title}</strong>
                                     <p>{post.excerpt}</p>
                                 </a>
-                            </Link>
-
-                        );
-                    })}
+                            </Link> ))}
                 </div>
             </main>
 
