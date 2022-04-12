@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from "next"
-import { getSession, useSession } from "next-auth/react"
+import { useSession } from "next-auth/react"
 import { getPrismicClient } from "../../../services/prismic"
 import { RichText } from 'prismic-dom'
 import Head from "next/head"
