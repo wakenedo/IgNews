@@ -4,40 +4,34 @@ import { useRouter } from 'next/router';
 import { api } from '../../services/api'
 import styles from './styles.module.scss'
 
-interface SubscribeButtonProps {
-    priceId: string;
-}
-
-export function SubscribeButton({ priceId }: SubscribeButtonProps) {
+export function SubscribeButton() {
     const { data: session } = useSession()
     const router = useRouter()
 
     async function handleSubscribe() {
-
-        
 
         if (!session) {
             signIn('github')
             return
         }
 
-        if(session.activeSubscription) {
+        if (session.activeSubscription) {
             router.push('/posts');
             return;
         }
 
         //creating check out session next/stripe
         try {
-            
+
             const response = await api.post('/subscribe')
 
             const { sessionId } = response.data;
 
             const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY)
-            
+
             stripe.redirectToCheckout({ sessionId: sessionId })
 
-                 console.log('sessionId log:',stripe)
+            console.log('sessionId log:', stripe)
         } catch (err) {
             alert(err.message)
         }

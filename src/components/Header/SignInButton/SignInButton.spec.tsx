@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { mocked } from 'ts-jest/utils'
 import { useSession } from 'next-auth/client'
 import { SignInButton } from '.'
