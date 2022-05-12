@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@prismicio/client": "^6.4.2",
+    "@prismicio/client": "^4.0.0",
     "@stripe/stripe-js": "^1.23.0",
     "axios": "^0.26.0",
     "faunadb": "^4.5.2",

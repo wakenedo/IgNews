@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { mocked } from 'ts-jest/utils';
-import { signIn, useSession } from 'next-auth/client'
+import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from "next/router";
 import { SubscribeButton } from '.';
 
@@ -12,7 +12,7 @@ describe('SubscribeButton component', () => {
     const useSessionMocked = mocked(useSession) 
     useSessionMocked.mockReturnValueOnce([null,false])
     
-    render(<SubscribeButton />)
+    render(<SubscribeButton priceId=''/>)
     
     expect(screen.getByText('Subscribe now')).toBeInTheDocument()
   })
@@ -25,7 +25,7 @@ describe('SubscribeButton component', () => {
     useSessionMocked.mockReturnValueOnce([, false])
 
 
-    render(<SubscribeButton/>)
+    render(<SubscribeButton priceId=''/>)
 
     const subscribeButton = screen.getByText('Subscribe now');
 
@@ -40,7 +40,7 @@ describe('SubscribeButton component', () => {
     const useSessionMocked = mocked(useSession);
     const pushMock = jest.fn();
 
-    useSessionMocked.mockReturnValueOnce([
+    useSessionMocked.mockReturnValueOnce(
       { 
         user: { 
           name: 'John Doe', 
@@ -50,13 +50,13 @@ describe('SubscribeButton component', () => {
         expires: 'fake-expires'
       }, 
       false
-    ])
+    )
 
     useRouterMocked.mockReturnValueOnce({
       push: pushMock
     } as any)
 
-    render(<SubscribeButton />)
+    render(<SubscribeButton priceId=''/>)
 
     const subscribeButton = screen.getByText('Subscribe now');
 
