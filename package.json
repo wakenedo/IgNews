@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@netlify/plugin-nextjs": "^4.7.0",
     "@prismicio/client": "^4.0.0",
     "@stripe/stripe-js": "^1.23.0",
     "axios": "^0.26.0",
