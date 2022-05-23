@@ -1,6 +1,6 @@
 .headerContainer {
     height: 5rem;
-    border-bottom: 1px solid var(--gray-800)
+    border-bottom: 1px solid var(--gray-800);
 }
 
 .headerContent {
@@ -16,7 +16,7 @@
         margin-left: 5rem;
         height: 5rem;
 
-        a{
+        a {
             display: inline-block;
             position: relative;
             padding: 0 0.5rem;
@@ -30,7 +30,7 @@
                 margin-left: 2rem;
             }
 
-            &:hover { 
+            &:hover {
                 color: var(--white);
             }
 
@@ -40,19 +40,23 @@
             }
 
             &.active::after {
-              content: '';
-              height: 3px;
-              border-radius: 3px 3px 0 0;
-              width: 100%;
-              position: absolute;
-              bottom: 1px;
-              left: 0;
-              background: var(--yellow-500);  
+                content: "";
+                height: 3px;
+                border-radius: 3px 3px 0 0;
+                width: 100%;
+                position: absolute;
+                bottom: 1px;
+                left: 0;
+                background: var(--yellow-500);
             }
         }
     }
 
     button {
-        margin-left: auto
+        margin-left: auto;
+    }
+
+    span {
+        width: 100px
     }
 }
