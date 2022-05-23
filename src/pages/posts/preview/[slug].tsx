@@ -24,7 +24,7 @@ export default function PostPreview({ post }: PostPreviewProps) {
 
     useEffect(() => {
         if (session?.activeSubscription) {
-            router.push(`/posts/${post.slug}`)
+            router.push(`ig-news-hsm0o9u8l-wakenedo.vercel.app/posts/${post.slug}`)
         }
     }, [session])
 
