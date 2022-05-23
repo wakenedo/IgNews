@@ -29,7 +29,7 @@ export default function Posts({ posts }: PostsProps) {
                 <div className={styles.posts}>
                     {posts.map((post) => 
                          (
-                            <Link href={`/posts/preview/${post.slug}`} key={post.slug}>
+                            <Link href={`ig-news-hsm0o9u8l-wakenedo.vercel.app/posts/preview/${post.slug}`} key={post.slug}>
                                 <a key={post.slug}>
                                     <time>{post.updatedAt}</time>
                                     <strong>{post.title}</strong>

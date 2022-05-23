@@ -46,7 +46,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
     if (!session?.activeSubscription) {
         return {
             redirect: {
-                destination: '/',
+                destination: 'http://ig-news-625obzuwh-wakenedo.vercel.app',
                 permanent: false,
             }
         }
