@@ -20,7 +20,7 @@ module.exports = {
     PRISMIC_ACCESS_TOKEN: 'MC5ZaF9zWFJFQUFDZ0FCRVM1.77-977-9WxkL77-977-9JW8D77-9Qu-_ve-_ve-_ve-_ve-_vRDvv71y77-9VTF177-977-977-9M--_ve-_vTtX',
 
 
-    NEXTAUTH_URL: 'https://ig-news-wakenedo.vercel.app/',
+    NEXTAUTH_URL: 'https://ig-news-wakenedo.vercel.app/api/auth',
     
   }
 }
